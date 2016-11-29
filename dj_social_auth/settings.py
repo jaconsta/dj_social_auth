@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'social.apps.django_app.default',
     # API
     'login_manager',
+    'user_profile',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -149,10 +150,11 @@ SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.social_auth.auth_allowed',
     'social.pipeline.social_auth.social_user',
     'social.pipeline.user.get_username',
+    'social.pipeline.user.create_user',
+    'user_profile.pipelines.add_gamer_user',
     'social.pipeline.social_auth.associate_user',
     'social.pipeline.social_auth.load_extra_data',
     'social.pipeline.user.user_details',
-    'login_manager.pipelines.save_profile_picture',
 )
 
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
@@ -164,5 +166,5 @@ FACEBOOK_EXTENDED_PERMISSIONS = ['email']
 
 SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS  = {
   'locale': 'en_US',
-  'fields': 'id, name, email, age_range, cover, locale, picture, verified'
+  'fields': 'id, name, email, first_name, last_name, age_range, cover, locale, picture, verified'
 }

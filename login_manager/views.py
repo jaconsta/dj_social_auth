@@ -26,14 +26,10 @@ def register_by_access_token(request, backend):
     try:
         user = request.backend.do_auth(request.GET.get('access_token'))
         print user.username
-        pprint(vars(user))
-        print ('-------------')
-        pprint(vars(user.social_user))
     except HTTPError as ex:
         print (ex.message)
         return Response('Invalid access_token.', status=status.HTTP_403_FORBIDDEN)
     if user:
-        print(request, user)
         return Response('OK')
     else:
         return Response('ERROR', status=status.HTTP_403_FORBIDDEN)
